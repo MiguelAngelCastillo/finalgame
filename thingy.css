@@ -3,9 +3,8 @@
 #canvas {
   border-style: solid;
   border-width: 2px;
-  background: black;
+  background: url("images/cobblestone.jpg");
   cursor: none;
-
 }
 
 #optionarea {
