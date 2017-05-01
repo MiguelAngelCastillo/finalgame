@@ -10,3 +10,8 @@ var enemy = makeImage("images/enemy.jpg", 30, 50, 30, 30, 1)
 
 var enemies = []
 var missiles = []
+
+function drawPlayer() {
+  setX(player, mouse.x)
+  setY(player, mouse.y)
+}
