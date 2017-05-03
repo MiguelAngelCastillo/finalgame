@@ -1,7 +1,7 @@
 var mouse = {x: 0, y: 0}
 
 var score = 0
-var scoreText = makeText("Score: -", 660, 50, 25, "sans-serif", "white", 1)
+var scoreText = makeText("Score: -", 660, 50, 25, "sans-serif", "black", 1)
 
 gameOver = false
 
@@ -36,7 +36,8 @@ for (var i = 0; i < missiles.length; i++) {
        }
 
 
-var enemies = []
+var enemiesLeft = []
+/*var enemiesRight = []*/
 var missiles = []
 
 function drawPlayer() {
@@ -57,7 +58,7 @@ function drawEverything() {
 }
 
 function makeEnemies() {
-  var enemy = makeImage("images/enemy.jpg", 750, random(0,400), 30, 30, .22)
+  var enemy = makeImage("images/enemy.jpg", 750, random(0,400), 30, 30, 1)
   enemies.push(enemy)
   setTimeout(makeEnemies, 600)
 }
@@ -72,21 +73,21 @@ function drawEnemies() {
   }
 }
 
-function makeEnemies() {
-  var enemy = makeImage("images/enemy.jpg", 0, random(0,400), 30, 30, .22)
+/*function makeEnemiesMore() {
+  var enemy = makeImage("images/enemy.jpg", 0, random(0,400), 30, 30, 1)
   enemies.push(enemy)
   setTimeout(makeEnemies, 600)
 }
 setTimeout(makeEnemies, 8000)
 
 function drawEnemies() {
-  for (var i = 0; i < enemies.length; i++){
-    move(enemies[i], -4, 0)
-    if (getX(enemies[i]) < 0) {
-      setX(enemies[i], 800)
+  for (var i = 0; i < enemies2.length; i++){
+    move(enemies2[i], 4, 0)
+    if (getX(enemies2[i]) < 0) {
+      setX(enemies2[i], 800)
     }
   }
-}
+}*/
 
 function fireMissile() {
   var rectangle = makeRect(getX(player) + 15, getY(player) + 15, 15, 10, "blue", 1)
@@ -113,4 +114,5 @@ function checkCollisionsPlayer() {
 
 drawEverything()
 makeEnemies()
+/*makeEnemiesMore()*/
 fireMissile()
