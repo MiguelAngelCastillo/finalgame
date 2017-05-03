@@ -20,11 +20,11 @@ function checkCollisionsMissiles() {
 
 function checkCollisionsMissiles() {
 for (var i = 0; i < missiles.length; i++) {
-  for (var j = 0; j < enemies.length; j++) {
-    if (missiles[i] != undefined && enemies[j] != undefined) {
-      if (collide(missiles[i], enemies[j], 0, -20) == true) {
-          drawExplosion(getX(enemies[j]), getY(enemies[j]))
-          removeArrayElement(enemies, j)
+  for (var j = 0; j < enemiesRight.length; j++) {
+    if (missiles[i] != undefined && enemiesRight[j] != undefined) {
+      if (collide(missiles[i], enemiesRight[j], 0, -20) == true) {
+          drawExplosion(getX(enemiesRight[j]), getY(enemiesRight[j]))
+          removeArrayElement(enemiesRight, j)
           removeArrayElement(missiles, i)
           console.log("same")
           score = score + 1
@@ -36,7 +36,7 @@ for (var i = 0; i < missiles.length; i++) {
        }
 
 
-var enemiesLeft = []
+var enemiesRight = []
 /*var enemiesRight = []*/
 var missiles = []
 
@@ -59,16 +59,16 @@ function drawEverything() {
 
 function makeEnemies() {
   var enemy = makeImage("images/enemy.jpg", 750, random(0,400), 30, 30, 1)
-  enemies.push(enemy)
+  enemiesRight.push(enemy)
   setTimeout(makeEnemies, 600)
 }
 setTimeout(makeEnemies, 8000)
 
 function drawEnemies() {
-  for (var i = 0; i < enemies.length; i++){
-    move(enemies[i], -4, 0)
-    if (getX(enemies[i]) < 0) {
-      setX(enemies[i], 800)
+  for (var i = 0; i < enemiesRight.length; i++){
+    move(enemiesRight[i], -4, 0)
+    if (getX(enemiesRight[i]) < 0) {
+      setX(enemiesRight[i], 800)
     }
   }
 }
@@ -103,10 +103,10 @@ function drawMissiles() {
 }
 
 function checkCollisionsPlayer() {
-   for(var i = 0; i < enemies.length; i++){
-       if(collide(player, enemies[i]) == true){
+   for(var i = 0; i < enemiesRight.length; i++){
+       if(collide(player, enemiesRight[i]) == true){
        removeElement(player)
-       removeArrayElement(enemies, i)
+       removeArrayElement(enemiesRight, i)
        gameOver = true
        }
    }
