@@ -18,7 +18,7 @@ function checkCollisionsMissiles() {
     }
 }*/
 
-function checkCollisionsMissiles() {
+function checkCollisionsMissilesRight() {
 for (var i = 0; i < missiles.length; i++) {
   for (var j = 0; j < enemiesRight.length; j++) {
     if (missiles[i] != undefined && enemiesRight[j] != undefined) {
@@ -29,15 +29,15 @@ for (var i = 0; i < missiles.length; i++) {
           console.log("same")
           score = score + 1
           scoreText.innerHTML = "Score: " + score
-                       }
-                   }
-               }
-           }
-       }
+          }
+        }
+    }
+  }
+}
 
 
 var enemiesRight = []
-/*var enemiesRight = []*/
+var enemiesLeft= []
 var missiles = []
 
 function drawPlayer() {
@@ -47,28 +47,45 @@ function drawPlayer() {
 
 function drawEverything() {
   drawPlayer()
-  drawEnemies()
+  drawEnemiesRight()
+  drawEnemiesLeft()
   drawMissiles()
-  checkCollisionsPlayer()
-  checkCollisionsMissiles()
+  checkCollisionsPlayerRight()
+  checkCollisionsMissilesRight()
 
   if (gameOver == false) {
     requestAnimationFrame(drawEverything)
   }
 }
 
-function makeEnemies() {
-  var enemy = makeImage("images/enemy.jpg", 750, random(0,400), 30, 30, 1)
-  enemiesRight.push(enemy)
-  setTimeout(makeEnemies, 600)
+function makeEnemiesRight() {
+  var enemyRight = makeImage("images/enemy.jpg", 750, random(0,400), 30, 30, 1)
+  enemiesRight.push(enemyRight)
+  setTimeout(makeEnemiesRight, 600)
 }
-setTimeout(makeEnemies, 8000)
+setTimeout(makeEnemiesRight, 8000)
 
-function drawEnemies() {
+function drawEnemiesRight() {
   for (var i = 0; i < enemiesRight.length; i++){
     move(enemiesRight[i], -4, 0)
     if (getX(enemiesRight[i]) < 0) {
       setX(enemiesRight[i], 800)
+    }
+  }
+}
+
+function makeEnemiesLeft() {
+  var enemyLeft = makeImage("images/enemy.jpg", 0, random(0, 400), 30, 30, 1)
+  enemiesLeft.push(enemyLeft)
+  setTimeout(makeEnemiesLeft, 600)
+}
+setTimeout(makeEnemiesLeft, 8000)
+
+function drawEnemiesLeft() {
+  for (var i = 0; i < enemiesLeft.length; i++){
+    move(enemiesLeft[i], 4, 0)
+    if (getX(enemiesLeft[i]) > 750) {
+      setX(enemiesLeft[i], 0)
     }
   }
 }
@@ -102,7 +119,7 @@ function drawMissiles() {
   }
 }
 
-function checkCollisionsPlayer() {
+function checkCollisionsPlayerRight() {
    for(var i = 0; i < enemiesRight.length; i++){
        if(collide(player, enemiesRight[i]) == true){
        removeElement(player)
@@ -113,6 +130,6 @@ function checkCollisionsPlayer() {
 }
 
 drawEverything()
-makeEnemies()
-/*makeEnemiesMore()*/
+makeEnemiesRight()
+makeEnemiesLeft()
 fireMissile()
