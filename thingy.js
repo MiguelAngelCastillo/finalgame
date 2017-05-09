@@ -18,14 +18,16 @@ function checkCollisionsMissiles() {
     }
 }*/
 
+/*Collision logic for the missiles to enemy contact*/
+
 function checkCollisionsMissilesRight() {
-for (var i = 0; i < missiles.length; i++) {
+for (var i = 0; i < missilesRight.length; i++) {
   for (var j = 0; j < enemiesRight.length; j++) {
-    if (missiles[i] != undefined && enemiesRight[j] != undefined) {
-      if (collide(missiles[i], enemiesRight[j], 0, -20) == true) {
+    if (missilesRight[i] != undefined && enemiesRight[j] != undefined) {
+      if (collide(missilesRight[i], enemiesRight[j], 0, -20) == true) {
           drawExplosion(getX(enemiesRight[j]), getY(enemiesRight[j]))
           removeArrayElement(enemiesRight, j)
-          removeArrayElement(missiles, i)
+          removeArrayElement(missilesRight, i)
           console.log("same")
           score = score + 1
           scoreText.innerHTML = "Score: " + score
@@ -35,10 +37,98 @@ for (var i = 0; i < missiles.length; i++) {
   }
 }
 
+function checkCollisionsMissilesLeft() {
+for (var i = 0; i < missilesLeft.length; i++) {
+  for (var j = 0; j < enemiesLeft.length; j++) {
+    if (missilesLeft[i] != undefined && enemiesLeft[j] != undefined) {
+      if (collide(missilesLeft[i], enemiesLeft[j], 0, -20) == true) {
+          drawExplosion(getX(enemiesLeft[j]), getY(enemiesLeft[j]))
+          removeArrayElement(enemiesLeft, j)
+          removeArrayElement(missilesLeft, i)
+          console.log("same")
+          score = score + 1
+          scoreText.innerHTML = "Score: " + score
+          }
+        }
+    }
+  }
+}
+/*For the right enemy*/
+function checkCollisionsMissilesUpRight() {
+for (var i = 0; i < missilesUp.length; i++) {
+  for (var j = 0; j < enemiesRight.length; j++) {
+    if (missilesUp[i] != undefined && enemiesRight[j] != undefined) {
+      if (collide(missilesUp[i], enemiesRight[j], 0, -20) == true) {
+          drawExplosion(getX(enemiesRight[j]), getY(enemiesRight[j]))
+          removeArrayElement(enemiesRight, j)
+          removeArrayElement(missilesUp, i)
+          console.log("same")
+          score = score + 1
+          scoreText.innerHTML = "Score: " + score
+          }
+        }
+    }
+  }
+}
+/*For the left enemy*/
+function checkCollisionsMissilesUpLeft() {
+for (var i = 0; i < missilesUp.length; i++) {
+  for (var j = 0; j < enemiesLeft.length; j++) {
+    if (missilesUp[i] != undefined && enemiesLeft[j] != undefined) {
+      if (collide(missilesUp[i], enemiesLeft[j], 0, -20) == true) {
+          drawExplosion(getX(enemiesLeft[j]), getY(enemiesLeft[j]))
+          removeArrayElement(enemiesLeft, j)
+          removeArrayElement(missilesUp, i)
+          console.log("same")
+          score = score + 1
+          scoreText.innerHTML = "Score: " + score
+          }
+        }
+    }
+  }
+}
+/*For the right enemy*/
+function checkCollisionsMissilesDownRight() {
+for (var i = 0; i < missilesDown.length; i++) {
+  for (var j = 0; j < enemiesRight.length; j++) {
+    if (missilesDown[i] != undefined && enemiesRight[j] != undefined) {
+      if (collide(missilesDown[i], enemiesRight[j], 0, -20) == true) {
+          drawExplosion(getX(enemiesRight[j]), getY(enemiesRight[j]))
+          removeArrayElement(enemiesRight, j)
+          removeArrayElement(missilesDown, i)
+          console.log("same")
+          score = score + 1
+          scoreText.innerHTML = "Score: " + score
+          }
+        }
+    }
+  }
+}
+/*For the left enemy*/
+function checkCollisionsMissilesDownLeft() {
+for (var i = 0; i < missilesDown.length; i++) {
+  for (var j = 0; j < enemiesLeft.length; j++) {
+    if (missilesDown[i] != undefined && enemiesLeft[j] != undefined) {
+      if (collide(missilesDown[i], enemiesLeft[j], 0, -20) == true) {
+          drawExplosion(getX(enemiesLeft[j]), getY(enemiesLeft[j]))
+          removeArrayElement(enemiesLeft, j)
+          removeArrayElement(missilesDown, i)
+          console.log("same")
+          score = score + 1
+          scoreText.innerHTML = "Score: " + score
+          }
+        }
+    }
+  }
+}
 
 var enemiesRight = []
 var enemiesLeft= []
-var missiles = []
+var missilesRight = []
+var missilesLeft = []
+var missilesUp = []
+var missilesDown = []
+
 
 function drawPlayer() {
   setX(player, mouse.x)
@@ -49,14 +139,25 @@ function drawEverything() {
   drawPlayer()
   drawEnemiesRight()
   drawEnemiesLeft()
-  drawMissiles()
+  drawMissilesRight()
+  drawMissilesLeft()
+  drawMissilesUp()
+  drawMissilesDown()
   checkCollisionsPlayerRight()
+  checkCollisionsPlayerLeft()
   checkCollisionsMissilesRight()
+  checkCollisionsMissilesLeft()
+  checkCollisionsMissilesUpLeft()
+  checkCollisionsMissilesUpRight()
+  checkCollisionsMissilesDownRight()
+  checkCollisionsMissilesDownLeft()
 
   if (gameOver == false) {
     requestAnimationFrame(drawEverything)
   }
 }
+
+/*Lines that generate the enemies*/
 
 function makeEnemiesRight() {
   var enemyRight = makeImage("images/enemy.jpg", 750, random(0,400), 30, 30, 1)
@@ -75,9 +176,11 @@ function drawEnemiesRight() {
 }
 
 function makeEnemiesLeft() {
+  if(gameOver == false){
   var enemyLeft = makeImage("images/enemy.jpg", 0, random(0, 400), 30, 30, 1)
   enemiesLeft.push(enemyLeft)
-  setTimeout(makeEnemiesLeft, 600)
+    setTimeout(makeEnemiesLeft, 600)
+}
 }
 setTimeout(makeEnemiesLeft, 8000)
 
@@ -106,19 +209,61 @@ function drawEnemies() {
   }
 }*/
 
-function fireMissile() {
-  var rectangle = makeRect(getX(player) + 15, getY(player) + 15, 15, 10, "blue", 1)
-  missiles.push(rectangle)
+/* Lines of code that generate missiles*/
+
+function fireMissileRight() {
+  var rectangleRight = makeRect(getX(player) + 15, getY(player) + 15, 15, 10, "blue", 1)
+  missilesRight.push(rectangleRight)
 }
 
-document.addEventListener("click", fireMissile)
+document.addEventListener("click", fireMissileRight)
 
-function drawMissiles() {
-  for (var i = 0; i < missiles.length; i++){
-    move(missiles[i], 5, 0)
+function drawMissilesRight() {
+  for (var i = 0; i < missilesRight.length; i++){
+    move(missilesRight[i], 5, 0)
   }
 }
 
+function fireMissileLeft() {
+  var rectangleLeft = makeRect(getX(player) + 15, getY(player) + 15, 15, 10, "blue", 1)
+  missilesLeft.push(rectangleLeft)
+}
+
+document.addEventListener("click", fireMissileLeft)
+
+function drawMissilesLeft() {
+  for (var i = 0; i < missilesLeft.length; i++){
+    move(missilesLeft[i], -5, 0)
+  }
+}
+
+function fireMissileUp() {
+  var rectangleUp = makeRect(getX(player) + 15, getY(player) + 15, 10, 15, "blue", 1)
+  missilesUp.push(rectangleUp)
+}
+
+document.addEventListener("click", fireMissileUp)
+
+function drawMissilesUp() {
+  for (var i = 0; i < missilesUp.length; i++){
+    move(missilesUp[i], 0, - 5)
+  }
+}
+
+function fireMissileDown() {
+  var rectangleDown = makeRect(getX(player) + 15, getY(player) + 15, 10, 15, "blue", 1)
+  missilesDown.push(rectangleDown)
+}
+
+document.addEventListener("click", fireMissileDown)
+
+function drawMissilesDown() {
+  for (var i = 0; i < missilesDown.length; i++){
+    move(missilesDown[i], 0, 5)
+  }
+}
+
+/*Player collision code*/
 function checkCollisionsPlayerRight() {
    for(var i = 0; i < enemiesRight.length; i++){
        if(collide(player, enemiesRight[i]) == true){
@@ -129,7 +274,20 @@ function checkCollisionsPlayerRight() {
    }
 }
 
+function checkCollisionsPlayerLeft() {
+   for(var i = 0; i < enemiesLeft.length; i++){
+       if(collide(player, enemiesLeft[i]) == true){
+       removeElement(player)
+       removeArrayElement(enemiesLeft, i)
+       gameOver = true
+       }
+   }
+}
+
 drawEverything()
 makeEnemiesRight()
 makeEnemiesLeft()
-fireMissile()
+fireMissileRight()
+fireMissileLeft()
+fireMissileUp()
+fireMissileDown()
