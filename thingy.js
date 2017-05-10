@@ -168,7 +168,7 @@ setTimeout(makeEnemiesRight, 8000)
 
 function drawEnemiesRight() {
   for (var i = 0; i < enemiesRight.length; i++){
-    move(enemiesRight[i], -4, 0)
+    move(enemiesRight[i], -3, 0)
     if (getX(enemiesRight[i]) < 0) {
       setX(enemiesRight[i], 800)
     }
@@ -186,7 +186,7 @@ setTimeout(makeEnemiesLeft, 8000)
 
 function drawEnemiesLeft() {
   for (var i = 0; i < enemiesLeft.length; i++){
-    move(enemiesLeft[i], 4, 0)
+    move(enemiesLeft[i], 3, 0)
     if (getX(enemiesLeft[i]) > 750) {
       setX(enemiesLeft[i], 0)
     }
@@ -262,6 +262,8 @@ function drawMissilesDown() {
     move(missilesDown[i], 0, 5)
   }
 }
+/*Enemy fires*/
+
 
 /*Player collision code*/
 function checkCollisionsPlayerRight() {
