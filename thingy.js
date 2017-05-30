@@ -6,6 +6,8 @@ var scoreText = makeText("Score: -", 660, 50, 25, "sans-serif", "black", 1)
 gameOver = false
 
 var player = makeImage("images/pixelcharacter.png", 30, 100, 30, 30, 1)
+/*var enemyRight = makeImage("images/enemy.jpg", 750, random(0,400), 30, 30, 1)
+var enemyLeft = makeImage("images/enemy.jpg", 0, random(0, 400), 30, 30, 1)*/
 
 /*
 function checkCollisionsMissiles() {
@@ -128,6 +130,7 @@ var missilesRight = []
 var missilesLeft = []
 var missilesUp = []
 var missilesDown = []
+var enemyMissilesRight = []
 
 
 function drawPlayer() {
@@ -263,7 +266,17 @@ function drawMissilesDown() {
   }
 }
 /*Enemy fires*/
+/*function enemyRightMissiles() {
+  var rectangleEnemyRight = makeRect(getX(enemyRight) + 15, getY(enemyRight) + 15, 15, 10, "red", 1)
+  enemyMissilesRight.push(rectangleEnemyRight)
+}
 
+function enemyRightDraw() {
+  for (var i = 0; i < enemyMissilesRight.length; i++) {
+    move(enemyMissilesRight[i], 0, -5)
+  }
+}
+setTimeout(enemyRightDraw, 1000)*/
 
 /*Player collision code*/
 function checkCollisionsPlayerRight() {
